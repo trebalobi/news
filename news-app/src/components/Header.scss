@@ -1,0 +1,53 @@
+@import '../design-tokens/_scss-variables.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  background-color: $dark-blue;
+  width: 100%;
+
+  &-left,
+  &-right {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.header-left__link a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 60px;
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: 0.3s;
+  &:hover {
+    color: $red;
+  }
+}
+
+.header-right__link a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 60px;
+  color: white;
+  text-decoration: none;
+  border-top: none;
+  border-bottom: none;
+  margin-left: -1px;
+  padding: 0 12px 0 12px;
+  transition: 0.3s;
+  &:hover {
+    background-color: $red;
+  }
+}
