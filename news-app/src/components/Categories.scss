@@ -41,7 +41,6 @@
   position: absolute;
   width: fit-content;
   height: fit-content;
-  background-color: pink;
   &__left {
     left: 0;
   }
@@ -60,23 +59,17 @@
   width: 100%;
   display: flex;
   margin: auto;
-  &--left {
-    transform: translateX(-300px);
-  }
-  &--right {
-    transform: translateX(300px);
-  }
 }
 
 .category-preview-item {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  min-width: 30%;
   height: fit-content;
   border: solid 1px gray;
-  margin: 0 10px 0 10px;
+  margin: 0 2% 0 2%;
   &__img {
-    width: 250px;
+    width: 95%;
     height: auto;
     margin: 5px;
   }
