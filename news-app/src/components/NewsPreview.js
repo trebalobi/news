@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './News.scss';
 
-export default class NewsPreview extends Component {
+class NewsPreview extends Component {
+  handleClick = () => {
+    this.props.linksStateChange();
+  };
   render() {
     return (
       <div className="news-preview">
@@ -17,9 +21,21 @@ export default class NewsPreview extends Component {
         ></img>
         <div>Description</div>
         <div className="news-preview__more">
-          <NavLink to={`/news`}>More {'>'}</NavLink>
+          <NavLink onClick={this.handleClick} to={`/news`}>
+            More {'>'}
+          </NavLink>
         </div>
       </div>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    linksStateChange: () => {
+      dispatch({ type: 'LINKS_STATE_CHANGE', disable: true });
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NewsPreview);

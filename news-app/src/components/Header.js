@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
 import { MdMenu } from 'react-icons/md';
+import { connect } from 'react-redux';
 import './Header.scss';
 
 const leftLinks = [
@@ -35,10 +36,13 @@ const rightLinks = [
   },
 ];
 
-export default class Header extends Component {
+class Header extends Component {
   constructor() {
     super();
-    this.state = { isMobile: window.innerWidth < 1000 };
+    this.state = {
+      isMobile: window.innerWidth < 1000,
+      linkClassName: 'header-right__link',
+    };
   }
 
   componentDidMount() {
@@ -53,6 +57,21 @@ export default class Header extends Component {
     );
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.isDisabled !== this.props.isDisabled) {
+      this.setState({
+        linkClassName: `header-right__link${
+          this.props.isDisabled.linksState ? '--disabled' : ''
+        }`,
+      });
+    }
+  }
+
+  // calls function to change state of right links
+  handleClick = () => {
+    this.props.linksStateChange();
+  };
+
   drawLeftLinks = (arr) => {
     const navLinks = arr.map((el) => {
       return (
@@ -60,7 +79,9 @@ export default class Header extends Component {
           key={el._id}
           className={!this.state.isMobile ? 'header-left__link' : 'burger-content__link'}
         >
-          <NavLink to={el.path}>{el.name}</NavLink>
+          <NavLink onClick={this.handleClick} to={el.path}>
+            {el.name}
+          </NavLink>
         </li>
       );
     });
@@ -74,7 +95,8 @@ export default class Header extends Component {
   drawRightLinks = (arr) => {
     const countryLinks = arr.map((el) => {
       return (
-        <li key={el._id} className="header-right__link">
+        <li key={el._id} className={this.state.linkClassName}>
+          {/* if isDisabled=FALSE the links are NOT DISABLED; the initial state is FALSE */}
           <NavLink to={el.path}>{el.name}</NavLink>
         </li>
       );
@@ -104,3 +126,19 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isDisabled: state.linksState,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    linksStateChange: () => {
+      dispatch({ type: 'LINKS_STATE_CHANGE', disable: false });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
