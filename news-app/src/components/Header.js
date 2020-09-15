@@ -4,7 +4,7 @@ import { IconContext } from 'react-icons/lib';
 import { MdMenu } from 'react-icons/md';
 import './Header.scss';
 
-const links = [
+const leftLinks = [
   {
     _id: 1,
     path: '/top-news',
@@ -22,17 +22,31 @@ const links = [
   },
 ];
 
+const rightLinks = [
+  {
+    _id: 1,
+    path: '/top-news',
+    name: 'UK',
+  },
+  {
+    _id: 2,
+    path: '/top-news',
+    name: 'US',
+  },
+];
+
 export default class Header extends Component {
   constructor() {
     super();
-    this.state = { isMobile: false };
+    this.state = { isMobile: window.innerWidth < 1000 };
   }
+
   componentDidMount() {
     window.addEventListener(
       'resize',
       () => {
         this.setState({
-          isMobile: window.innerWidth < 700,
+          isMobile: window.innerWidth < 1000,
         });
       },
       false,
@@ -44,27 +58,30 @@ export default class Header extends Component {
       return (
         <li
           key={el._id}
-          className={
-            !this.state.isMobile
-              ? 'header-left__link'
-              : 'burger-content__link'
-          }
+          className={!this.state.isMobile ? 'header-left__link' : 'burger-content__link'}
         >
           <NavLink to={el.path}>{el.name}</NavLink>
         </li>
       );
     });
     return (
-      <ul
-        className={
-          !this.state.isMobile ? 'header-left' : 'burger-content'
-        }
-      >
+      <ul className={!this.state.isMobile ? 'header-left' : 'burger-content'}>
         {navLinks}
       </ul>
     );
   };
-  //add burger menu
+
+  drawRightLinks = (arr) => {
+    const countryLinks = arr.map((el) => {
+      return (
+        <li key={el._id} className="header-right__link">
+          <NavLink to={el.path}>{el.name}</NavLink>
+        </li>
+      );
+    });
+    return <ul className="header-right">{countryLinks}</ul>;
+  };
+
   render() {
     return (
       <header className="header">
@@ -75,21 +92,14 @@ export default class Header extends Component {
                 <MdMenu />
               </div>
 
-              {this.drawLeftLinks(links)}
+              {this.drawLeftLinks(leftLinks)}
             </div>
           </IconContext.Provider>
         ) : (
-          this.drawLeftLinks(links)
+          this.drawLeftLinks(leftLinks)
         )}
 
-        <ul className="header-right">
-          <li className="header-right__link">
-            <NavLink to="/top-news">GB</NavLink>
-          </li>
-          <li className="header-right__link">
-            <NavLink to="/top-news">US</NavLink>
-          </li>
-        </ul>
+        {this.drawRightLinks(rightLinks)}
       </header>
     );
   }
