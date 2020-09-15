@@ -25,12 +25,13 @@
     color: black;
     a {
       text-decoration: none;
-      :visited {
+      font-weight: 500;
+      &:visited {
         color: black;
+        &:hover {
+          color: $red;
+        }
       }
-    }
-    :hover {
-      color: $red;
     }
   }
 }

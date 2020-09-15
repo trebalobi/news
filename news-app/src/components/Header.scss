@@ -34,21 +34,41 @@
   }
 }
 
-.header-right__link a {
+.header-right__link {
+  //not liking this but will fix i have time
   display: flex;
   justify-content: center;
   align-items: center;
   width: 30px;
   height: 55px;
-  color: white;
-  text-decoration: none;
-  border-top: none;
+
   border-bottom: none;
   margin-left: -1px;
   padding: 0 12px 0 12px;
-  transition: 0.3s;
-  &:hover {
-    color: $red;
+
+  a {
+    color: white;
+    text-decoration: none;
+    border-top: none;
+    transition: 0.3s;
+    &:hover {
+      color: $red;
+    }
+  }
+  &--disabled > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 55px;
+    text-decoration: none;
+    border-top: none;
+    border-bottom: none;
+    margin-left: -1px;
+    padding: 0 12px 0 12px;
+    pointer-events: none;
+    opacity: 0.5;
+    color: grey;
   }
 }
 
