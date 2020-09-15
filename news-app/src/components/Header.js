@@ -109,15 +109,14 @@ class Header extends Component {
     return (
       <header className="header">
         {this.state.isMobile ? (
-          <IconContext.Provider value={{ className: 'burger-icon' }}>
-            <div className="burger">
-              <div className="burger-icon-container">
+          <div className="burger">
+            <div className="burger-icon-container">
+              <IconContext.Provider value={{ className: 'burger-icon' }}>
                 <MdMenu />
-              </div>
-
-              {this.drawLeftLinks(leftLinks)}
+              </IconContext.Provider>
             </div>
-          </IconContext.Provider>
+            {this.drawLeftLinks(leftLinks)}
+          </div>
         ) : (
           this.drawLeftLinks(leftLinks)
         )}
