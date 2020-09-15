@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
 import { MdMenu } from 'react-icons/md';
 import { connect } from 'react-redux';
+import { linksStateChangeAction } from '../store/actions/actionCreators';
 import './Header.scss';
 
 const leftLinks = [
@@ -136,7 +137,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     linksStateChange: () => {
-      dispatch({ type: 'LINKS_STATE_CHANGE', disable: false });
+      dispatch(linksStateChangeAction(false));
     },
   };
 };

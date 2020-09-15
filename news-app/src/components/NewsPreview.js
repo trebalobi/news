@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { linksStateChangeAction } from '../store/actions/actionCreators';
 import './News.scss';
 
 class NewsPreview extends Component {
@@ -33,7 +34,7 @@ class NewsPreview extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     linksStateChange: () => {
-      dispatch({ type: 'LINKS_STATE_CHANGE', disable: true });
+      dispatch(linksStateChangeAction(true));
     },
   };
 };
