@@ -24,17 +24,23 @@ export default class CategoryPreview extends Component {
   };
 
   handleClickSwitchLeft = () => {
-    this.setState({ translateAmount: this.state.translateAmount - 100 });
+    this.setState({
+      translateAmount:
+        this.state.translateAmount <= -70 ? -70 : this.state.translateAmount - 35,
+    });
   };
 
   handleClickSwitchRight = () => {
-    this.setState({ translateAmount: this.state.translateAmount + 100 });
+    this.setState({
+      translateAmount:
+        this.state.translateAmount >= 0 ? 0 : this.state.translateAmount + 35,
+    });
   };
 
   render() {
-    const x = 100;
     const inlineStyle = {
-      transform: `translateX(${this.state.translateAmount}px)`,
+      transform: `translateX(${this.state.translateAmount}%)`,
+      transition: `transform 1s`,
     };
 
     const classNames = `category-preview__content ${
@@ -42,6 +48,7 @@ export default class CategoryPreview extends Component {
         ? 'category-preview__content--visible'
         : 'category-preview__content--hidden'
     }`;
+
     return (
       <div className="category-preview">
         <div className="category-preview__title">
@@ -55,7 +62,7 @@ export default class CategoryPreview extends Component {
         <div className={classNames}>
           <div
             className={'switch-icon-container switch-icon-container__left'}
-            onClick={this.handleClickSwitchLeft}
+            onMouseDown={this.handleClickSwitchLeft}
           >
             <IconContext.Provider value={{ className: 'switch-icon switch-icon__left' }}>
               <MdChevronLeft />
@@ -63,6 +70,8 @@ export default class CategoryPreview extends Component {
           </div>
           <div className={`category-preview__container`}>
             <div className={`category-preview__innercontainer`} style={inlineStyle}>
+              <CategoryPreviewItem />
+              <CategoryPreviewItem />
               <CategoryPreviewItem />
               <CategoryPreviewItem />
               <CategoryPreviewItem />
