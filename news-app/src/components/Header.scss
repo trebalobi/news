@@ -1,0 +1,110 @@
+@import '../design-tokens/_scss-variables.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  background-color: $dark-blue;
+  width: 100%;
+
+  &-left,
+  &-right {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 20px;
+  }
+}
+
+.header-left__link a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 55px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+  &:hover {
+    background-color: $red;
+  }
+}
+
+.header-right__link a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 55px;
+  color: white;
+  text-decoration: none;
+  border-top: none;
+  border-bottom: none;
+  margin-left: -1px;
+  padding: 0 12px 0 12px;
+  transition: 0.3s;
+  &:hover {
+    color: $red;
+  }
+}
+
+.burger {
+  display: inline-block;
+  position: relative;
+}
+
+.burger-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  color: white;
+  cursor: pointer;
+}
+
+.burger-icon {
+  width: 35px;
+  height: 35px;
+  color: white;
+  transition: 0.3s;
+  &:hover {
+    color: $red;
+  }
+}
+
+.burger-content {
+  display: none;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  text-decoration: none;
+  list-style: none;
+  padding-left: 0px;
+  z-index: 1;
+  &__link a {
+    padding: 0;
+    background-color: $dark-blue;
+    width: 185px;
+    height: 40px;
+    display: flex;
+    justify-content: left;
+    padding-left: 15px;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    &:hover {
+      background-color: $red;
+    }
+  }
+}
+
+.burger:hover .burger-content {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
