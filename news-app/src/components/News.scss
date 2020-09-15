@@ -1,0 +1,36 @@
+@import '../design-tokens/scss-variables';
+
+.top-news {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.news-preview {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  height: fit-content;
+  padding: 15px;
+  margin: 20px;
+  border: solid 1px gray;
+  &__img {
+    width: 250px;
+    height: auto;
+    margin: 5px;
+  }
+  &__more {
+    display: flex;
+    justify-content: flex-end;
+    color: black;
+    a {
+      text-decoration: none;
+      :visited {
+        color: black;
+      }
+    }
+    :hover {
+      color: $red;
+    }
+  }
+}
