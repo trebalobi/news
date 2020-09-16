@@ -4,7 +4,7 @@ import './Categories.scss';
 
 export default class CategoryPreviewItem extends Component {
   handleClick = () => {
-    console.log('weee');
+    console.log(':)');
   };
   render() {
     return (

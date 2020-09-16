@@ -14,7 +14,7 @@ export default class CategoryCarousel extends Component {
   handleClickSwitchLeft = () => {
     this.setState({
       translateAmount:
-        this.state.translateAmount >= 0 ? 0 : this.state.translateAmount + 35,
+        this.state.translateAmount >= 0 ? 0 : this.state.translateAmount + 35, //fix this and make it responsive
     });
   };
 
