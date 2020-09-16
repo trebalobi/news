@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { linksStateChangeAction } from '../store/actions/actionCreators';
+import { connect } from 'react-redux';
 import './Categories.scss';
 
-export default class CategoryPreviewItem extends Component {
+class CategoryPreviewItem extends Component {
   handleClick = () => {
-    console.log(':)');
+    this.props.linksStateChange();
   };
   render() {
     return (
@@ -23,3 +25,13 @@ export default class CategoryPreviewItem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    linksStateChange: () => {
+      dispatch(linksStateChangeAction(true));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CategoryPreviewItem);
