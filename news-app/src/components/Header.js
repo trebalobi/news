@@ -3,7 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
 import { MdMenu } from 'react-icons/md';
 import { connect } from 'react-redux';
-import { linksStateChangeAction } from '../store/actions/actionCreators';
+import {
+  linksStateChangeAction,
+  countryChangeAction,
+} from '../redux/actions/actionCreators';
 import './Header.scss';
 
 const leftLinks = [
@@ -28,7 +31,7 @@ const rightLinks = [
   {
     _id: 1,
     path: '/top-news',
-    name: 'UK',
+    name: 'GB',
   },
   {
     _id: 2,
@@ -54,16 +57,14 @@ class Header extends Component {
           isMobile: window.innerWidth < 1000,
         });
       },
-      false,
+      false
     );
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.isDisabled !== this.props.isDisabled) {
+    if (prevProps.linksState !== this.props.linksState) {
       this.setState({
-        linkClassName: `header-right__link${
-          this.props.isDisabled.linksState ? '--disabled' : ''
-        }`,
+        linkClassName: `header-right__link${this.props.linksState ? '--disabled' : ''}`,
       });
     }
   }
@@ -93,12 +94,18 @@ class Header extends Component {
     );
   };
 
+  countryChangeClick = (country) => {
+    this.props.countryChange(country);
+  };
+
   drawRightLinks = (arr) => {
     const countryLinks = arr.map((el) => {
       return (
         <li key={el._id} className={this.state.linkClassName}>
           {/* if isDisabled=FALSE the links are NOT DISABLED; the initial state is FALSE */}
-          <NavLink to={el.path}>{el.name}</NavLink>
+          <NavLink onClick={() => this.countryChangeClick(el.name)} to={el.path}>
+            {el.name}
+          </NavLink>
         </li>
       );
     });
@@ -129,7 +136,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isDisabled: state.linksState,
+    linksState: state.linksState,
   };
 };
 
@@ -137,6 +144,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     linksStateChange: () => {
       dispatch(linksStateChangeAction(false));
+    },
+    countryChange: (country) => {
+      dispatch(countryChangeAction(country));
     },
   };
 };

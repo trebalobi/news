@@ -1,1 +1,0 @@
-export const LINKS_STATE_CHANGE = 'LINKS_STATE_CHANGE';

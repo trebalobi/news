@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { linksStateChangeAction } from '../store/actions/actionCreators';
+import { linksStateChangeAction } from '../redux/actions/actionCreators';
 import { connect } from 'react-redux';
 import './Categories.scss';
 
