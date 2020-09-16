@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Categories.scss';
 
 export default class CategoryPreviewItem extends Component {
+  handleClick = () => {
+    console.log('weee');
+  };
   render() {
     return (
-      <div className="category-preview-item">
+      <NavLink to={'/news'} onClick={this.handleClick} className="category-preview-item">
         <div>Title</div>
         <img
           className="category-preview-item__img"
@@ -15,7 +19,7 @@ export default class CategoryPreviewItem extends Component {
           alt="placeholder"
         ></img>
         <div>Description</div>
-      </div>
+      </NavLink>
     );
   }
 }

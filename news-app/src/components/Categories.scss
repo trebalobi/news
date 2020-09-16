@@ -10,6 +10,7 @@
 
 .expand-icon {
   display: flex;
+  cursor: pointer;
   justify-content: flex-end;
   align-items: center;
   width: 20px;
@@ -22,10 +23,23 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  opacity: 1;
+  visibility: visible;
   width: 50%;
+  animation: fadeIn 1s;
+
   &--hidden {
+    visibility: hidden;
     display: none;
+    opacity: 0;
+    animation: fadeOut 1s;
   }
+}
+
+.category-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .switch-icon {
@@ -33,13 +47,12 @@
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 200px;
+  width: 100%;
 }
 
 .switch-icon-container {
   position: absolute;
-  width: fit-content;
+  width: 5%;
   height: fit-content;
   &__left {
     left: 0;
@@ -49,13 +62,13 @@
   }
 }
 
-.category-preview__container {
+.category-carousel__outerContainer {
   width: 90%;
   margin: auto;
   overflow: hidden;
 }
 
-.category-preview__innercontainer {
+.category-carousel__innerContainer {
   width: 100%;
   display: flex;
   margin: auto;
@@ -68,9 +81,33 @@
   height: fit-content;
   border: solid 1px gray;
   margin: 0 2% 0 2%;
+  text-decoration: none;
   &__img {
     width: 95%;
     height: auto;
     margin: 5px;
+  }
+  &:visited {
+    color: black;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
