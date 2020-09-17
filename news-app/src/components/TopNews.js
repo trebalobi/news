@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NewsPreview from './NewsPreview';
-import { getTopNewsAction } from '../redux/actions/actionCreators';
+import { getTopNewsAction, initReadyChangeAction } from '../redux/actions/actionCreators';
 import { connect } from 'react-redux';
 
 class TopNews extends Component {
@@ -20,8 +20,12 @@ class TopNews extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.setInitReady(false);
+  }
+
   drawNewsPreviewItems = () => {
-    const topNewsArr = this.props.topNews.topNews;
+    const topNewsArr = this.props.topNews;
     const newsPrev = topNewsArr.map((el, i) => {
       return (
         <NewsPreview
@@ -54,8 +58,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getTopNews: (c) => {
-      dispatch(getTopNewsAction(c));
+    getTopNews: (country) => {
+      dispatch(getTopNewsAction(country));
+    },
+    setInitReady: (isReady) => {
+      dispatch(initReadyChangeAction(isReady));
     },
   };
 };

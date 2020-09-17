@@ -103,9 +103,7 @@ class Header extends Component {
       return (
         <li key={el._id} className={this.state.linkClassName}>
           {/* if isDisabled=FALSE the links are NOT DISABLED; the initial state is FALSE */}
-          <NavLink onClick={() => this.countryChangeClick(el.name)} to={el.path}>
-            {el.name}
-          </NavLink>
+          <a onClick={() => this.countryChangeClick(el.name)}>{el.name}</a>
         </li>
       );
     });
