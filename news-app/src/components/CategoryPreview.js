@@ -3,12 +3,13 @@ import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { IconContext } from 'react-icons/lib';
 import CategoryCarousel from './CategoryCarousel';
 import './Categories.scss';
+import { NavLink } from 'react-router-dom';
 
 export default class CategoryPreview extends Component {
   constructor() {
     super();
     this.state = {
-      isExpanded: false,
+      isExpanded: true,
       translateAmount: 0,
     };
   }
@@ -25,7 +26,9 @@ export default class CategoryPreview extends Component {
     return (
       <div className="category-preview">
         <div className="category-preview__title">
-          <h3>{this.props.title}</h3>
+          <NavLink to={`/${this.props.title.toLowerCase()}`}>
+            <h3>{this.props.title}</h3>
+          </NavLink>
           <div onClick={this.handleClickExpand}>
             <IconContext.Provider value={{ className: 'expand-icon' }}>
               {this.state.isExpanded ? <MdExpandMore /> : <MdExpandLess />}
