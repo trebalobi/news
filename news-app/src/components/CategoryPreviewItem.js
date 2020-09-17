@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { linksStateChangeAction } from '../redux/actions/actionCreators';
+import {
+  linksStateChangeAction,
+  viewNewsItemAction,
+} from '../redux/actions/actionCreators';
 import { connect } from 'react-redux';
 import './Categories.scss';
 
 class CategoryPreviewItem extends Component {
   handleClick = () => {
-    this.props.linksStateChange();
+    const item = {
+      title: this.props.title,
+      image: this.props.imgUrl,
+      content: this.props.content,
+    };
+    console.log(item);
+    this.props.viewNewsItem(item);
+    this.props.linksStateChange(true);
   };
   render() {
     return (
       <NavLink to={'/news'} onClick={this.handleClick} className="category-preview-item">
-        <div>Title</div>
+        <div>{this.props.title}</div>
         <img
           className="category-preview-item__img"
-          src={
-            //this.props.url
-            'https://image.cnbcfm.com/api/v1/image/106646833-15965415672020-08-03t101755z_1794012163_rc2a6i9yj9yc_rtrmadp_0_usa-tiktok.jpeg?v=1596542482'
-          }
+          src={this.props.imgUrl}
           alt="placeholder"
         ></img>
-        <div>Description</div>
+        <div>{this.props.description}</div>
       </NavLink>
     );
   }
@@ -28,8 +35,11 @@ class CategoryPreviewItem extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    linksStateChange: () => {
-      dispatch(linksStateChangeAction(true));
+    viewNewsItem: (item) => {
+      dispatch(viewNewsItemAction(item));
+    },
+    linksStateChange: (isActive) => {
+      dispatch(linksStateChangeAction(isActive));
     },
   };
 };

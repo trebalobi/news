@@ -22,7 +22,6 @@ export default class CategoryPreview extends Component {
     const classNames = `category-preview__content ${
       this.state.isExpanded ? '' : 'category-preview__content--hidden'
     }`;
-
     return (
       <div className="category-preview">
         <div className="category-preview__title">
@@ -36,7 +35,7 @@ export default class CategoryPreview extends Component {
           </div>
         </div>
         <div className={classNames}>
-          <CategoryCarousel />
+          <CategoryCarousel a={this.props.as.articles} />
         </div>
       </div>
     );

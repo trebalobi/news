@@ -11,3 +11,17 @@ export function getTopNews(country) {
     `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${API_KEY}`
   ).then((res) => res.json());
 }
+
+export function getCategoryPreview(country, category) {
+  //this is just the 5 news for categories
+  return fetch(
+    `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&pageSize=5&apiKey=${API_KEY}`
+  ).then((res) => res.json());
+}
+
+export function getCategory(country, category) {
+  //this is for the whole category
+  return fetch(
+    `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${API_KEY}`
+  ).then((res) => res.json());
+}
