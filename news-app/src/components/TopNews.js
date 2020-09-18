@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import NewsPreviewItem from './NewsPreviewItem';
-import { getTopNewsAction, initReadyChangeAction } from '../redux/actions/actionCreators';
+import {
+  getTopNewsAction,
+  initReadyChangeTNAction,
+} from '../redux/actions/actionCreators';
 import { connect } from 'react-redux';
 
 class TopNews extends Component {
@@ -11,22 +14,26 @@ class TopNews extends Component {
     };
   }
   componentDidMount() {
-    this.props.getTopNews(this.props.country);
+    if (this.props.topNews.length === 0) {
+      this.props.getTopNews(this.props.country);
+      return;
+    }
+    this.props.setInitReady(true);
   } //here is where i dispatch the first action to fill up news
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.country !== this.props.country) {
-      this.props.getTopNews(this.props.country);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.country !== this.props.country) {
+  //     this.props.getTopNews(this.props.country);
+  //   }
+  // }
 
   componentWillUnmount() {
     this.props.setInitReady(false);
+    console.log(this.props.initReady, 'top news will unmount');
   }
 
   drawNewsPreviewItems = () => {
     const topNewsArr = this.props.topNews;
-    console.log(topNewsArr);
     const newsPrev = topNewsArr.map((el, i) => {
       return (
         <NewsPreviewItem
@@ -42,6 +49,7 @@ class TopNews extends Component {
   };
 
   render() {
+    console.log(this.props.initReady, 'top news');
     return (
       <div className="top-news">
         {this.props.initReady ? this.drawNewsPreviewItems() : <div>loading...</div>}
@@ -53,7 +61,7 @@ class TopNews extends Component {
 const mapStateToProps = (state) => {
   return {
     topNews: state.topNews,
-    initReady: state.initReady,
+    initReady: state.initReadyTN,
     country: state.country,
   };
 };
@@ -64,7 +72,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getTopNewsAction(country));
     },
     setInitReady: (isReady) => {
-      dispatch(initReadyChangeAction(isReady));
+      dispatch(initReadyChangeTNAction(isReady));
     },
   };
 };

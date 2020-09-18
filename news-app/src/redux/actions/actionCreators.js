@@ -8,13 +8,34 @@ export const countryChangeAction = (payload) => ({
   payload,
 });
 
+export const getDataOnCountryChangeAction = (country, categories) => ({
+  type: 'GET_DATA_ON_COUNTRY_CHANGE_REQUESTED',
+  country,
+  categories,
+});
+
 export const getTopNewsAction = (payload) => ({
   type: 'GET_TOP_NEWS_REQUESTED',
   payload,
 });
 
-export const initReadyChangeAction = (payload) => ({
-  type: 'INIT_READY_CHANGE',
+// export const initReadyChangeAction = (payload) => ({
+//   type: 'INIT_READY_CHANGE',
+//   payload,
+// });
+
+export const initReadyChangeTNAction = (payload) => ({
+  type: 'INIT_READY_CHANGE_TN',
+  payload,
+});
+
+export const initReadyChangeCategoriesAction = (payload) => ({
+  type: 'INIT_READY_CHANGE_CATEGORIES',
+  payload,
+});
+
+export const initReadyChangeSearchAction = (payload) => ({
+  type: 'INIT_READY_CHANGE_SEARCH',
   payload,
 });
 

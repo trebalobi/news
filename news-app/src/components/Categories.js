@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import CategoryPreview from './CategoryPreview';
 import {
   getCategoriesAction,
-  initReadyChangeAction,
+  initReadyChangeCategoriesAction,
 } from '../redux/actions/actionCreators';
 
-const categories = [
+export const categories = [
   'entertainment',
   'general',
   'health',
@@ -17,18 +17,31 @@ const categories = [
 
 class Categories extends Component {
   componentDidMount() {
-    this.props.getCategories(this.props.country, categories);
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.country !== this.props.country) {
+    if (this.props.categories.length === 0) {
       this.props.getCategories(this.props.country, categories);
+      return;
     }
+    this.props.setInitReady(true);
   }
-  componentWillUnmount() {
-    this.props.setInitReady(false);
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.country !== this.props.country) {
+  //     this.props.getCategories(this.props.country, categories);
+  //   }
+  // }
+  // componentWillUnmount() {
+  //   this.props.setInitReady(false);
+  //   console.log(this.props.initReady, 'categories will unmount');
+  // }
+  capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   render() {
     const articles = this.props.categories;
+    console.log(this.props.initReady, 'categories render');
+    // if (!this.props.initReady) {
+    //   return <div>loading...</div>;
+    // }
     return (
       <div className="categories">
         {this.props.initReady ? (
@@ -53,7 +66,7 @@ class Categories extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    initReady: state.initReady,
+    initReady: state.initReadyCategories,
     country: state.country,
     categories: state.categories,
   };
@@ -65,7 +78,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getCategoriesAction(country, categories));
     },
     setInitReady: (isReady) => {
-      dispatch(initReadyChangeAction(isReady));
+      dispatch(initReadyChangeCategoriesAction(isReady));
     },
   };
 };

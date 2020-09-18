@@ -14,7 +14,6 @@ class CategoryPreviewItem extends Component {
       image: this.props.imageUrl,
       content: this.props.content,
     };
-    console.log(item);
     this.props.viewNewsItem(item);
     this.props.linksStateChange(true);
   };

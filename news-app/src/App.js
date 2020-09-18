@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header';
 import TopNews from './components/TopNews';
@@ -12,10 +12,14 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Route exact path={['/', '/top-news']} component={TopNews}></Route>
-        <Route path="/categories" component={Categories}></Route>
-        <Route path="/search" component={Search}></Route>
-        <Route path="/news" component={News}></Route>
+        <Route exact path="/">
+          <Redirect to="/top-news"></Redirect>
+        </Route>
+
+        <Route exact path="/top-news" component={TopNews}></Route>
+        <Route exact path="/categories" component={Categories}></Route>
+        <Route exact path="/search" component={Search}></Route>
+        <Route exact path="/news" component={News}></Route>
       </div>
     </BrowserRouter>
   );
