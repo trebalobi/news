@@ -33,7 +33,7 @@ class Categories extends Component {
       <div className="categories">
         {this.props.initReady ? (
           <div>
-            <h3>Top 5 news by categories from GB/US{/*this.props.country*/}</h3>
+            <h3>Top 5 news by categories from {this.props.country.toUpperCase()}</h3>
             <div>
               <CategoryPreview as={articles[0]} title="Entertainment" />
               <CategoryPreview as={articles[1]} title="General" />
