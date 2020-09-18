@@ -6,7 +6,11 @@ import { connect } from 'react-redux';
 import {
   linksStateChangeAction,
   countryChangeAction,
+  getTopNewsAction,
+  getCategoriesAction,
+  getDataOnCountryChangeAction,
 } from '../redux/actions/actionCreators';
+import { categories } from './Categories';
 import './Header.scss';
 
 const leftLinks = [
@@ -95,7 +99,7 @@ class Header extends Component {
   };
 
   countryChangeClick = (country) => {
-    this.props.countryChange(country);
+    this.props.getDataOnCountryChange(country, categories);
   };
 
   drawRightLinks = (arr) => {
@@ -135,6 +139,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     linksState: state.linksState,
+    country: state.country,
   };
 };
 
@@ -145,6 +150,15 @@ const mapDispatchToProps = (dispatch) => {
     },
     countryChange: (country) => {
       dispatch(countryChangeAction(country));
+    },
+    getTopNews: (country) => {
+      dispatch(getTopNewsAction(country));
+    },
+    getCategories: (country, categories) => {
+      dispatch(getCategoriesAction(country, categories));
+    },
+    getDataOnCountryChange: (country, categories) => {
+      dispatch(getDataOnCountryChangeAction(country, categories));
     },
   };
 };
