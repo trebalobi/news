@@ -45,31 +45,31 @@ export default class CategoryCarousel extends Component {
           <div className={`category-carousel__innerContainer`} style={inlineStyle}>
             <CategoryPreviewItem
               title={this.props.a[0].title}
-              imgUrl={this.props.a[0].urlToImage}
+              imageUrl={this.props.a[0].urlToImage}
               description={this.props.a[0].description}
               content={this.props.a[0].content}
             />
             <CategoryPreviewItem
               title={this.props.a[1].title}
-              imgUrl={this.props.a[1].urlToImage}
+              imageUrl={this.props.a[1].urlToImage}
               description={this.props.a[1].description}
               content={this.props.a[1].content}
             />
             <CategoryPreviewItem
               title={this.props.a[2].title}
-              imgUrl={this.props.a[2].urlToImage}
+              imageUrl={this.props.a[2].urlToImage}
               description={this.props.a[2].description}
               content={this.props.a[2].content}
             />
             <CategoryPreviewItem
               title={this.props.a[3].title}
-              imgUrl={this.props.a[3].urlToImage}
+              imageUrl={this.props.a[3].urlToImage}
               description={this.props.a[3].description}
               content={this.props.a[3].content}
             />
             <CategoryPreviewItem
               title={this.props.a[4].title}
-              imgUrl={this.props.a[4].urlToImage}
+              imageUrl={this.props.a[4].urlToImage}
               description={this.props.a[4].description}
               content={this.props.a[4].content}
             />
