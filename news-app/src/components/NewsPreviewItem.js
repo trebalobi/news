@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { linksStateChangeAction } from '../redux/actions/actionCreators';
+import {
+  linksStateChangeAction,
+  viewNewsItemAction,
+} from '../redux/actions/actionCreators';
 import './News.scss';
 
-class NewsPreview extends Component {
+class NewsPreviewItem extends Component {
   handleClick = () => {
+    const item = {
+      title: this.props.title,
+      image: this.props.imageURL,
+      content: this.props.content,
+    };
+    console.log(item);
+    this.props.viewNewsItem(item);
     this.props.linksStateChange();
   };
   render() {
@@ -30,10 +40,13 @@ class NewsPreview extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    viewNewsItem: (item) => {
+      dispatch(viewNewsItemAction(item));
+    },
     linksStateChange: () => {
       dispatch(linksStateChangeAction(true));
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(NewsPreview);
+export default connect(null, mapDispatchToProps)(NewsPreviewItem);

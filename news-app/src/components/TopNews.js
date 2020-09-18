@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewsPreview from './NewsPreview';
+import NewsPreviewItem from './NewsPreviewItem';
 import { getTopNewsAction, initReadyChangeAction } from '../redux/actions/actionCreators';
 import { connect } from 'react-redux';
 
@@ -26,14 +26,16 @@ class TopNews extends Component {
 
   drawNewsPreviewItems = () => {
     const topNewsArr = this.props.topNews;
+    console.log(topNewsArr);
     const newsPrev = topNewsArr.map((el, i) => {
       return (
-        <NewsPreview
+        <NewsPreviewItem
           key={i}
           title={el.title}
           imageURL={el.urlToImage}
           description={el.description}
-        ></NewsPreview>
+          content={el.content}
+        ></NewsPreviewItem>
       );
     });
     return newsPrev;

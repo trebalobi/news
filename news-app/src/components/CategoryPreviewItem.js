@@ -11,7 +11,7 @@ class CategoryPreviewItem extends Component {
   handleClick = () => {
     const item = {
       title: this.props.title,
-      image: this.props.imgUrl,
+      image: this.props.imageUrl,
       content: this.props.content,
     };
     console.log(item);
@@ -24,7 +24,7 @@ class CategoryPreviewItem extends Component {
         <div>{this.props.title}</div>
         <img
           className="category-preview-item__img"
-          src={this.props.imgUrl}
+          src={this.props.imageUrl}
           alt="placeholder"
         ></img>
         <div>{this.props.description}</div>
