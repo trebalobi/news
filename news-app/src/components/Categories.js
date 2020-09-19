@@ -39,21 +39,35 @@ class Categories extends Component {
   render() {
     const articles = this.props.categories;
     console.log(this.props.initReady, 'categories render');
-    // if (!this.props.initReady) {
-    //   return <div>loading...</div>;
-    // }
+
     return (
       <div className="categories">
         {this.props.initReady ? (
           <div>
             <h3>Top 5 news by categories from {this.props.country.toUpperCase()}</h3>
             <div>
-              <CategoryPreview as={articles[0]} title="Entertainment" />
-              <CategoryPreview as={articles[1]} title="General" />
-              <CategoryPreview as={articles[2]} title="Health" />
-              <CategoryPreview as={articles[3]} title="Science" />
-              <CategoryPreview as={articles[4]} title="Sport" />
-              <CategoryPreview as={articles[5]} title="Technology" />
+              <CategoryPreview
+                as={articles[0]}
+                title="Entertainment"
+                category={categories[0]}
+              />
+              <CategoryPreview
+                as={articles[1]}
+                title="General"
+                category={categories[1]}
+              />
+              <CategoryPreview as={articles[2]} title="Health" category={categories[2]} />
+              <CategoryPreview
+                as={articles[3]}
+                title="Science"
+                category={categories[3]}
+              />
+              <CategoryPreview as={articles[4]} title="Sport" category={categories[4]} />
+              <CategoryPreview
+                as={articles[5]}
+                title="Technology"
+                category={categories[5]}
+              />
             </div>
           </div>
         ) : (

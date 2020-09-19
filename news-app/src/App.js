@@ -6,6 +6,7 @@ import TopNews from './components/TopNews';
 import Categories from './components/Categories';
 import Search from './components/Search';
 import News from './components/News'; //ovo je za sada
+import CategoryPage from './components/CategoryPage';
 
 function App() {
   return (
@@ -20,6 +21,18 @@ function App() {
         <Route exact path="/categories" component={Categories}></Route>
         <Route exact path="/search" component={Search}></Route>
         <Route exact path="/news" component={News}></Route>
+        <Route
+          exact
+          path={[
+            '/entertainment',
+            '/general',
+            '/health',
+            '/science',
+            '/sport',
+            '/technology',
+          ]}
+          component={CategoryPage}
+        ></Route>
       </div>
     </BrowserRouter>
   );
