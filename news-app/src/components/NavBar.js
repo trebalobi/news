@@ -10,8 +10,8 @@ import {
   getCategoriesAction,
   getDataOnCountryChangeAction,
 } from '../redux/actions/actionCreators';
-import { categories } from './Categories';
-import './Header.scss';
+import { categories } from '../pages/CategoriesPage';
+import '../styles/NavBar.scss';
 
 const leftLinks = [
   {
@@ -44,7 +44,7 @@ const rightLinks = [
   },
 ];
 
-class Header extends Component {
+class NavBar extends Component {
   constructor() {
     super();
     this.state = {
@@ -167,4 +167,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

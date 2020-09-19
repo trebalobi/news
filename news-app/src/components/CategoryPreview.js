@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { IconContext } from 'react-icons/lib';
 import CategoryCarousel from './CategoryCarousel';
-import './Categories.scss';
 import { NavLink } from 'react-router-dom';
 import { setCurrentCategoryAction } from '../redux/actions/actionCreators';
 import { connect } from 'react-redux';
+import '../styles/Categories.scss';
 
 class CategoryPreview extends Component {
   constructor() {
@@ -43,7 +43,7 @@ class CategoryPreview extends Component {
           </div>
         </div>
         <div className={classNames}>
-          <CategoryCarousel a={this.props.as.articles} />
+          <CategoryCarousel articles={this.props.articlesObj.articles} />
         </div>
       </div>
     );

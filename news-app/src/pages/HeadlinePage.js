@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class News extends Component {
+class HeadlinePage extends Component {
   render() {
     return (
       <div className="news">
@@ -23,4 +23,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(News);
+export default connect(mapStateToProps)(HeadlinePage);

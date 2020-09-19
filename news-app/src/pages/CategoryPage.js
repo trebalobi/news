@@ -4,7 +4,7 @@ import {
   getCategoryAction,
   initReadyChangeCategoryAction,
 } from '../redux/actions/actionCreators';
-import NewsPreviewItem from './NewsPreviewItem';
+import NewsPreviewItem from '../components/NewsPreviewItem';
 
 class CategoryPage extends Component {
   componentDidMount() {

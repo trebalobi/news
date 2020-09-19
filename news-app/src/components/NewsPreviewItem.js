@@ -5,7 +5,7 @@ import {
   linksStateChangeAction,
   viewNewsItemAction,
 } from '../redux/actions/actionCreators';
-import './News.scss';
+import '../styles/News.scss';
 
 class NewsPreviewItem extends Component {
   handleClick = () => {
