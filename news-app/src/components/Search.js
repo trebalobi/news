@@ -7,6 +7,13 @@ import {
 } from '../redux/actions/actionCreators';
 
 class Search extends Component {
+  constructor() {
+    super();
+    this.state = {
+      inputValue: '',
+      arrayToFilter: [],
+    };
+  }
   componentDidMount() {
     if (this.props.topNews.length === 0) {
       this.props.getTopNews(this.props.country);
@@ -15,9 +22,12 @@ class Search extends Component {
     this.props.setInitReady(true);
   }
 
-  drawNewsPreviewItems = () => {
-    const topNewsArr = this.props.topNews;
-    const newsPrev = topNewsArr.map((el, i) => {
+  newsFilterOnChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  };
+
+  drawNewsPreviewItems = (newsArr) => {
+    const newsPrev = newsArr.map((el, i) => {
       return (
         <NewsPreviewItem
           key={i}
@@ -37,9 +47,12 @@ class Search extends Component {
     }
   };
   render() {
+    const newsToFilter = Object.values(this.props.topNews);
+    const filteredNews = newsToFilter.filter((news) => {
+      return news.title.toLowerCase().includes(this.state.inputValue.toLowerCase());
+    });
     const country =
       this.props.country.toLowerCase() === 'gb' ? 'Great Britain' : 'United States';
-    console.log(this.props.country);
     return (
       <div>
         <h1>Search top news from {country}</h1>
@@ -49,9 +62,14 @@ class Search extends Component {
             placeholder="Search term..."
             className="search"
             onKeyUp={this.handleEnter}
+            onChange={this.newsFilterOnChange}
           />{' '}
         </div>
-        {this.props.initReady ? this.drawNewsPreviewItems() : <div>loading...</div>}
+        {this.props.initReady ? (
+          this.drawNewsPreviewItems(filteredNews)
+        ) : (
+          <div>loading...</div>
+        )}
       </div>
     );
   }
