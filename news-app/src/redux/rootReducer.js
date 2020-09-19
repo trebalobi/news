@@ -6,8 +6,13 @@ import {
   readyStateTNReducer,
   readyStateCategoriesReducer,
   readyStateSearchReducer,
+  readyStateCategoryPageReducer,
 } from './reducers/readyStateReducer';
-import { categoriesReducer } from './reducers/categoriesReducer';
+import {
+  categoriesReducer,
+  categoryReducer,
+  setCurrentCategoryReducer,
+} from './reducers/categoriesReducer';
 import { viewNewsItemReducer } from './reducers/viewNewsItemReducer';
 
 export const initialState = {
@@ -15,11 +20,14 @@ export const initialState = {
   initReadyTN: false,
   initReadyCategories: false,
   initReadySearch: false,
+  initReadyCategoryPage: false,
   linksState: false,
   country: 'gb',
   topNews: [],
   categories: [],
   newsItem: { title: '', image: '', content: '' },
+  currentCategory: '',
+  category: [],
 };
 
 export const rootReducer = combineReducers({
@@ -31,5 +39,8 @@ export const rootReducer = combineReducers({
   initReadyTN: readyStateTNReducer,
   initReadyCategories: readyStateCategoriesReducer,
   initReadySearch: readyStateSearchReducer,
+  initReadyCategoryPage: readyStateCategoryPageReducer,
+  currentCategory: setCurrentCategoryReducer,
+  category: categoryReducer,
 });
 //this is the root reducer which combines all others

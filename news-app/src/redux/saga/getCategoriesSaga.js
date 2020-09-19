@@ -11,6 +11,8 @@ import {
   INIT_READY_CHANGE_TN,
   GET_TOP_NEWS_DONE,
   GET_DATA_ON_COUNTRY_CHANGE_REQUESTED,
+  INIT_READY_CHANGE_CATEGORY,
+  GET_CATEGORY_DONE,
 } from '../actions';
 
 function* callGetCategoryPreview(payload) {
@@ -29,15 +31,18 @@ export function* getCategoryPreviewSaga() {
 }
 
 export function* callGetDataOnCountryChange(payload) {
-  console.log('SDFGHJKLJHGFDSFGHJKLJHGFDSADFGHJKHGFDSA');
   yield put({ type: COUNTRY_CHANGE, payload: payload.country });
 
+  console.log(payload.country, payload.categories, payload.category);
   const cat = yield all(
     payload.categories.map((category) =>
       call(getCategoryPreview, payload.country, category)
     )
   );
-  const topNews = yield call(getTopNews, payload.country);
+  const [topNews, categoryArr] = yield all([
+    call(getTopNews, payload.country),
+    call(getCategory, payload.country, payload.category),
+  ]);
 
   yield all([
     put({ type: GET_CATEGORIES_DONE, payload: cat }),
@@ -45,6 +50,8 @@ export function* callGetDataOnCountryChange(payload) {
     put({ type: GET_TOP_NEWS_DONE, payload: topNews }),
     put({ type: INIT_READY_CHANGE_TN, payload: true }),
     put({ type: INIT_READY_CHANGE_SEARCH, payload: true }),
+    put({ type: GET_CATEGORY_DONE, payload: categoryArr }),
+    put({ type: INIT_READY_CHANGE_CATEGORY, payload: true }),
   ]);
 }
 

@@ -4,8 +4,10 @@ import { IconContext } from 'react-icons/lib';
 import CategoryCarousel from './CategoryCarousel';
 import './Categories.scss';
 import { NavLink } from 'react-router-dom';
+import { setCurrentCategoryAction } from '../redux/actions/actionCreators';
+import { connect } from 'react-redux';
 
-export default class CategoryPreview extends Component {
+class CategoryPreview extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,7 +19,10 @@ export default class CategoryPreview extends Component {
   handleClickExpand = () => {
     this.setState({ isExpanded: !this.state.isExpanded });
   };
-
+  setCurrentCategory = () => {
+    this.props.setCategory(this.props.category);
+    console.log('kliknut link');
+  };
   render() {
     const classNames = `category-preview__content ${
       this.state.isExpanded ? '' : 'category-preview__content--hidden'
@@ -25,7 +30,10 @@ export default class CategoryPreview extends Component {
     return (
       <div className="category-preview">
         <div className="category-preview__title">
-          <NavLink to={`/${this.props.title.toLowerCase()}`}>
+          <NavLink
+            onClick={this.setCurrentCategory}
+            to={`/${this.props.title.toLowerCase()}`}
+          >
             <h3>{this.props.title}</h3>
           </NavLink>
           <div onClick={this.handleClickExpand}>
@@ -41,3 +49,13 @@ export default class CategoryPreview extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCategory: (category) => {
+      dispatch(setCurrentCategoryAction(category));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CategoryPreview);

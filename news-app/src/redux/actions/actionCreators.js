@@ -8,10 +8,11 @@ export const countryChangeAction = (payload) => ({
   payload,
 });
 
-export const getDataOnCountryChangeAction = (country, categories) => ({
+export const getDataOnCountryChangeAction = (country, categories, category) => ({
   type: 'GET_DATA_ON_COUNTRY_CHANGE_REQUESTED',
   country,
   categories,
+  category,
 });
 
 export const getTopNewsAction = (payload) => ({
@@ -39,13 +40,29 @@ export const initReadyChangeSearchAction = (payload) => ({
   payload,
 });
 
+export const initReadyChangeCategoryAction = (payload) => ({
+  type: 'INIT_READY_CHANGE_CATEGORY',
+  payload,
+});
+
 export const getCategoriesAction = (country, categories) => ({
   type: 'GET_CATEGORIES_REQUESTED',
   country,
   categories,
 });
 
+export const getCategoryAction = (country, category) => ({
+  type: 'GET_CATEGORY_REQUESTED',
+  country,
+  category,
+});
+
 export const viewNewsItemAction = (payload) => ({
   type: 'VIEW_NEWS_ITEM',
+  payload,
+});
+
+export const setCurrentCategoryAction = (payload) => ({
+  type: 'CURRENT_CATEGORY_CHANGE',
   payload,
 });

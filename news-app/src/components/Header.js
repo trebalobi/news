@@ -98,8 +98,9 @@ class Header extends Component {
     );
   };
 
-  countryChangeClick = (country) => {
-    this.props.getDataOnCountryChange(country, categories);
+  countryChangeClick = (country, currentCategory) => {
+    console.log(this.props.currentCategory);
+    this.props.getDataOnCountryChange(country, categories, currentCategory);
   };
 
   drawRightLinks = (arr) => {
@@ -107,7 +108,9 @@ class Header extends Component {
       return (
         <li key={el._id} className={this.state.linkClassName}>
           {/* if isDisabled=FALSE the links are NOT DISABLED; the initial state is FALSE */}
-          <a onClick={() => this.countryChangeClick(el.name)}>{el.name}</a>
+          <a onClick={() => this.countryChangeClick(el.name, this.props.currentCategory)}>
+            {el.name}
+          </a>
         </li>
       );
     });
@@ -140,6 +143,7 @@ const mapStateToProps = (state) => {
   return {
     linksState: state.linksState,
     country: state.country,
+    currentCategory: state.currentCategory,
   };
 };
 
@@ -157,8 +161,8 @@ const mapDispatchToProps = (dispatch) => {
     getCategories: (country, categories) => {
       dispatch(getCategoriesAction(country, categories));
     },
-    getDataOnCountryChange: (country, categories) => {
-      dispatch(getDataOnCountryChangeAction(country, categories));
+    getDataOnCountryChange: (country, categories, category) => {
+      dispatch(getDataOnCountryChangeAction(country, categories, category));
     },
   };
 };
