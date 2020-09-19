@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CategoryPreview from './CategoryPreview';
+import CategoryPreview from '../components/CategoryPreview';
 import {
   getCategoriesAction,
   initReadyChangeCategoriesAction,
@@ -15,7 +15,7 @@ export const categories = [
   'technology',
 ];
 
-class Categories extends Component {
+class CategoriesPage extends Component {
   componentDidMount() {
     if (this.props.categories.length === 0) {
       this.props.getCategories(this.props.country, categories);
@@ -35,18 +35,34 @@ class Categories extends Component {
   capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+  drawCategoryPreviews = () => {
+    const prevArr = this.props.categories;
+
+    const categoriesPrev = prevArr.map((el, index) => {
+      console.log(el);
+      return (
+        <CategoryPreview
+          key={index}
+          articlesObj={el}
+          title={this.capitalizeFirstLetter(categories[index])}
+          category={categories[index]}
+        />
+      );
+    });
+    return categoriesPrev;
+  };
 
   render() {
     const articles = this.props.categories;
-    console.log(this.props.initReady, 'categories render');
-
+    console.log(articles);
     return (
       <div className="categories">
         {this.props.initReady ? (
           <div>
             <h3>Top 5 news by categories from {this.props.country.toUpperCase()}</h3>
             <div>
-              <CategoryPreview
+              {this.drawCategoryPreviews()}
+              {/* <CategoryPreview
                 as={articles[0]}
                 title="Entertainment"
                 category={categories[0]}
@@ -67,7 +83,7 @@ class Categories extends Component {
                 as={articles[5]}
                 title="Technology"
                 category={categories[5]}
-              />
+              /> */}
             </div>
           </div>
         ) : (
@@ -97,4 +113,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesPage);

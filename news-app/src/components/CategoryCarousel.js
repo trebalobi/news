@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CategoryPreviewItem from './CategoryPreviewItem';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { IconContext } from 'react-icons/lib';
-import './Categories.scss';
+import '../styles/Categories.scss';
 
 export default class CategoryCarousel extends Component {
   constructor() {
@@ -25,6 +25,21 @@ export default class CategoryCarousel extends Component {
     });
   };
 
+  drawCategoryPreviewItems = () => {
+    const articlesArr = this.props.articles;
+    const articlesPrev = articlesArr.map((el, index) => {
+      return (
+        <CategoryPreviewItem
+          key={index}
+          title={el.title}
+          imageUrl={el.urlToImage}
+          description={el.description}
+          content={el.content}
+        />
+      );
+    });
+    return articlesPrev;
+  };
   render() {
     const inlineStyle = {
       transform: `translateX(${this.state.translateAmount}%)`,
@@ -43,7 +58,8 @@ export default class CategoryCarousel extends Component {
         </div>
         <div className={`category-carousel__outerContainer`}>
           <div className={`category-carousel__innerContainer`} style={inlineStyle}>
-            <CategoryPreviewItem
+            {this.drawCategoryPreviewItems()}
+            {/* <CategoryPreviewItem
               title={this.props.a[0].title}
               imageUrl={this.props.a[0].urlToImage}
               description={this.props.a[0].description}
@@ -72,7 +88,7 @@ export default class CategoryCarousel extends Component {
               imageUrl={this.props.a[4].urlToImage}
               description={this.props.a[4].description}
               content={this.props.a[4].content}
-            />
+            /> */}
           </div>
         </div>
         <div

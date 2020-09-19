@@ -13,7 +13,6 @@ function* callGetTopNews(country) {
   const topNews = yield call(getTopNews, country.payload);
 
   yield put({ type: GET_TOP_NEWS_DONE, payload: topNews });
-  console.log(topNews);
   yield all([
     put({ type: INIT_READY_CHANGE_TN, payload: true }),
     put({ type: INIT_READY_CHANGE_SEARCH, payload: true }),

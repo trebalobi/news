@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NewsPreviewItem from './NewsPreviewItem';
+import NewsPreviewItem from '../components/NewsPreviewItem';
 import {
   getTopNewsAction,
   initReadyChangeSearchAction,
 } from '../redux/actions/actionCreators';
 
-class Search extends Component {
+class SearchPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -94,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

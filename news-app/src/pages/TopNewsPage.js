@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import NewsPreviewItem from './NewsPreviewItem';
+import NewsPreviewItem from '../components/NewsPreviewItem';
 import {
   getTopNewsAction,
   initReadyChangeTNAction,
 } from '../redux/actions/actionCreators';
 import { connect } from 'react-redux';
 
-class TopNews extends Component {
+class TopNewsPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,7 +29,6 @@ class TopNews extends Component {
 
   componentWillUnmount() {
     this.props.setInitReady(false);
-    console.log(this.props.initReady, 'top news will unmount');
   }
 
   drawNewsPreviewItems = () => {
@@ -49,7 +48,6 @@ class TopNews extends Component {
   };
 
   render() {
-    console.log(this.props.initReady, 'top news');
     return (
       <div className="top-news">
         {this.props.initReady ? this.drawNewsPreviewItems() : <div>loading...</div>}
@@ -77,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopNews);
+export default connect(mapStateToProps, mapDispatchToProps)(TopNewsPage);
