@@ -5,6 +5,7 @@ import {
   getTopNewsAction,
   initReadyChangeSearchAction,
 } from '../redux/actions/actionCreators';
+import '../styles/Search.scss';
 
 class SearchPage extends Component {
   constructor() {
@@ -38,7 +39,7 @@ class SearchPage extends Component {
         ></NewsPreviewItem>
       );
     });
-    return <div>{newsPrev}</div>;
+    return <div className="search-news__container">{newsPrev}</div>;
   };
   handleEnter = (e) => {
     if (e.key === 'Enter') {
@@ -54,17 +55,16 @@ class SearchPage extends Component {
     const country =
       this.props.country.toLowerCase() === 'gb' ? 'Great Britain' : 'United States';
     return (
-      <div>
+      <div className="search-page">
         <h1>Search top news from {country}</h1>
-        <div>
-          <input
-            type="text"
-            placeholder="Search term..."
-            className="search"
-            onKeyUp={this.handleEnter}
-            onChange={this.newsFilterOnChange}
-          />{' '}
-        </div>
+        <input
+          type="text"
+          placeholder="Search term..."
+          className="search-page__input"
+          onKeyUp={this.handleEnter}
+          onChange={this.newsFilterOnChange}
+        />
+
         {this.props.initReady ? (
           this.drawNewsPreviewItems(filteredNews)
         ) : (

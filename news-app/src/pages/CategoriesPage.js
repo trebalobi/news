@@ -23,15 +23,10 @@ class CategoriesPage extends Component {
     }
     this.props.setInitReady(true);
   }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.country !== this.props.country) {
-  //     this.props.getCategories(this.props.country, categories);
-  //   }
-  // }
-  // componentWillUnmount() {
-  //   this.props.setInitReady(false);
-  //   console.log(this.props.initReady, 'categories will unmount');
-  // }
+  componentWillUnmount() {
+    this.props.setInitReady(false);
+  }
+
   capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -39,7 +34,6 @@ class CategoriesPage extends Component {
     const prevArr = this.props.categories;
 
     const categoriesPrev = prevArr.map((el, index) => {
-      console.log(el);
       return (
         <CategoryPreview
           key={index}
@@ -53,38 +47,13 @@ class CategoriesPage extends Component {
   };
 
   render() {
-    const articles = this.props.categories;
-    console.log(articles);
     return (
-      <div className="categories">
+      <div className="categories-page">
         {this.props.initReady ? (
-          <div>
-            <h3>Top 5 news by categories from {this.props.country.toUpperCase()}</h3>
-            <div>
-              {this.drawCategoryPreviews()}
-              {/* <CategoryPreview
-                as={articles[0]}
-                title="Entertainment"
-                category={categories[0]}
-              />
-              <CategoryPreview
-                as={articles[1]}
-                title="General"
-                category={categories[1]}
-              />
-              <CategoryPreview as={articles[2]} title="Health" category={categories[2]} />
-              <CategoryPreview
-                as={articles[3]}
-                title="Science"
-                category={categories[3]}
-              />
-              <CategoryPreview as={articles[4]} title="Sport" category={categories[4]} />
-              <CategoryPreview
-                as={articles[5]}
-                title="Technology"
-                category={categories[5]}
-              /> */}
-            </div>
+          <div className="categories-page__container">
+            <h1>Top 5 news by categories from {this.props.country.toUpperCase()}</h1>
+
+            {this.drawCategoryPreviews()}
           </div>
         ) : (
           <div>loading...</div>

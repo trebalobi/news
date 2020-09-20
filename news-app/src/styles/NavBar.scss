@@ -39,34 +39,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
+  width: 50px;
   height: 55px;
 
   border-bottom: none;
-  margin-left: -1px;
-  padding: 0 12px 0 12px;
-  cursor: pointer;
 
-  a {
+  .button {
     color: white;
+    cursor: pointer;
     text-decoration: none;
     border-top: none;
     transition: 0.3s;
+    background-color: transparent;
+    height: 55px;
+    width: 60px;
+    border: none;
+    outline: none;
     &:hover {
-      color: $red;
+      background-color: $red;
+    }
+
+    &--active {
+      background-color: $red;
+      outline: none;
     }
   }
-  &--disabled > a {
+  &--disabled .button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 55px;
     text-decoration: none;
     border-top: none;
     border-bottom: none;
-    margin-left: -1px;
-    padding: 0 12px 0 12px;
+    width: 50px;
+    height: 55px;
+    border: none;
+    outline: none;
+    background-color: transparent;
     pointer-events: none;
     opacity: 0.5;
     color: grey;
@@ -100,13 +109,20 @@
 
 .burger-content {
   display: none;
-  position: absolute;
-  width: fit-content;
-  height: fit-content;
-  text-decoration: none;
-  list-style: none;
-  padding-left: 0px;
-  z-index: 1;
+
+  &--visible {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    text-decoration: none;
+    list-style: none;
+    padding-left: 0px;
+    z-index: 1;
+  }
   &__link a {
     padding: 0;
     background-color: $dark-blue;
@@ -122,10 +138,4 @@
       background-color: $red;
     }
   }
-}
-
-.burger:hover .burger-content {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
 }

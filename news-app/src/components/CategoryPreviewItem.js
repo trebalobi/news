@@ -20,13 +20,13 @@ class CategoryPreviewItem extends Component {
   render() {
     return (
       <NavLink to={'/news'} onClick={this.handleClick} className="category-preview-item">
-        <div>{this.props.title}</div>
+        <h3>{this.props.title}</h3>
         <img
           className="category-preview-item__img"
           src={this.props.imageUrl}
           alt="placeholder"
         ></img>
-        <div>{this.props.description}</div>
+        <div className="category-preview-item__content">{this.props.description}</div>
       </NavLink>
     );
   }

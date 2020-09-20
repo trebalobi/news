@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import '../styles/Headline.scss';
 
 class HeadlinePage extends Component {
   render() {
     return (
-      <div className="news">
+      <div className="headline">
         <h1>{this.props.item.title}</h1>
         <img
-          className="news__img"
+          className="headline__img"
           src={this.props.item.image}
           alt={'image_placeholder'}
         ></img>
-        <div>{this.props.item.content}</div>
+        <div className="headline__content">{this.props.item.content}</div>
       </div>
     );
   }

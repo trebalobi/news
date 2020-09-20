@@ -5,6 +5,7 @@ import {
   initReadyChangeCategoryAction,
 } from '../redux/actions/actionCreators';
 import NewsPreviewItem from '../components/NewsPreviewItem';
+import '../styles/Category.scss';
 
 class CategoryPage extends Component {
   componentDidMount() {
@@ -28,7 +29,7 @@ class CategoryPage extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="category-page">
         {this.props.initReady ? this.drawNewsPreviewItems() : <div>loading...</div>}
       </div>
     );

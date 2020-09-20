@@ -28,7 +28,6 @@ export const setCurrentCategoryReducer = (state = initialState, action) => {
 export const categoryReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CATEGORY_DONE: {
-      console.log(action.payload, 'u reduceru ');
       return action.payload;
     }
     default:

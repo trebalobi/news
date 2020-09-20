@@ -21,16 +21,6 @@ class TopNewsPage extends Component {
     this.props.setInitReady(true);
   } //here is where i dispatch the first action to fill up news
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.country !== this.props.country) {
-  //     this.props.getTopNews(this.props.country);
-  //   }
-  // }
-
-  componentWillUnmount() {
-    this.props.setInitReady(false);
-  }
-
   drawNewsPreviewItems = () => {
     const topNewsArr = this.props.topNews;
     const newsPrev = topNewsArr.map((el, i) => {

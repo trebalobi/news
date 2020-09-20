@@ -15,17 +15,14 @@ import '../styles/NavBar.scss';
 
 const leftLinks = [
   {
-    _id: 1,
     path: '/top-news',
     name: 'Top News',
   },
   {
-    _id: 2,
     path: '/categories',
     name: 'Categories',
   },
   {
-    _id: 3,
     path: '/search',
     name: 'Search',
   },
@@ -33,12 +30,10 @@ const leftLinks = [
 
 const rightLinks = [
   {
-    _id: 1,
     path: '/top-news',
     name: 'GB',
   },
   {
-    _id: 2,
     path: '/top-news',
     name: 'US',
   },
@@ -48,8 +43,10 @@ class NavBar extends Component {
   constructor() {
     super();
     this.state = {
-      isMobile: window.innerWidth < 1000,
+      isMobile: window.innerWidth < 700,
       linkClassName: 'header-right__link',
+      menuOpen: false,
+      activeButton: 'GB',
     };
   }
 
@@ -58,7 +55,7 @@ class NavBar extends Component {
       'resize',
       () => {
         this.setState({
-          isMobile: window.innerWidth < 1000,
+          isMobile: window.innerWidth < 700,
         });
       },
       false
@@ -73,56 +70,77 @@ class NavBar extends Component {
     }
   }
 
-  // calls function to change state of right links
   handleClick = () => {
     this.props.linksStateChange();
+    this.burgerMenuOpen();
   };
 
   drawLeftLinks = (arr) => {
-    const navLinks = arr.map((el) => {
+    const navLinks = arr.map((el, index) => {
       return (
         <li
-          key={el._id}
+          key={index}
           className={!this.state.isMobile ? 'header-left__link' : 'burger-content__link'}
         >
-          <NavLink onClick={this.handleClick} to={el.path}>
+          <NavLink
+            activeStyle={{ backgroundColor: '#bc4123' }}
+            onClick={this.handleClick}
+            to={el.path}
+          >
             {el.name}
           </NavLink>
         </li>
       );
     });
     return (
-      <ul className={!this.state.isMobile ? 'header-left' : 'burger-content'}>
+      <ul
+        className={
+          !this.state.isMobile
+            ? 'header-left'
+            : this.state.menuOpen
+            ? 'burger-content'
+            : 'burger-content--visible'
+        }
+      >
         {navLinks}
       </ul>
     );
   };
 
   countryChangeClick = (country, currentCategory) => {
-    console.log(this.props.currentCategory);
     this.props.getDataOnCountryChange(country, categories, currentCategory);
+    this.setState({ activeButton: country });
   };
 
   drawRightLinks = (arr) => {
-    const countryLinks = arr.map((el) => {
+    const countryLinks = arr.map((el, index) => {
       return (
-        <li key={el._id} className={this.state.linkClassName}>
+        <li key={index} className={this.state.linkClassName}>
           {/* if isDisabled=FALSE the links are NOT DISABLED; the initial state is FALSE */}
-          <a onClick={() => this.countryChangeClick(el.name, this.props.currentCategory)}>
+          <button
+            type="button"
+            onClick={() => this.countryChangeClick(el.name, this.props.currentCategory)}
+            className={
+              el.name === this.state.activeButton ? 'button button--active' : 'button'
+            }
+          >
             {el.name}
-          </a>
+          </button>
         </li>
       );
     });
     return <ul className="header-right">{countryLinks}</ul>;
   };
 
+  burgerMenuOpen = () => {
+    this.setState({ menuOpen: !this.state.menuOpen });
+  };
   render() {
     return (
       <header className="header">
         {this.state.isMobile ? (
           <div className="burger">
-            <div className="burger-icon-container">
+            <div className="burger-icon-container" onClick={this.burgerMenuOpen}>
               <IconContext.Provider value={{ className: 'burger-icon' }}>
                 <MdMenu />
               </IconContext.Provider>

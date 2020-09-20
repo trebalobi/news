@@ -20,13 +20,16 @@ class NewsPreviewItem extends Component {
   render() {
     return (
       <div className="news-preview">
-        <h3>{this.props.title}</h3>
-        <img
-          className="news-preview__img"
-          src={this.props.imageURL}
-          alt="placeholder"
-        ></img>
-        <div>{this.props.description}</div>
+        <div className="news-preview__title">
+          <h3>{this.props.title}</h3>
+          <img
+            className="news-preview__img"
+            src={this.props.imageURL}
+            alt="placeholder"
+          ></img>
+
+          <div className="news-preview__description">{this.props.description}</div>
+        </div>
         <div className="news-preview__more">
           <NavLink onClick={this.handleClick} to={`/news`}>
             More {'>'}
