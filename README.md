@@ -5,6 +5,7 @@ News is an application for viewing the latest news from GB and US.
 ## Installation
 
 ```bash
+cd news-app
 npm install
 npm start
 ```
